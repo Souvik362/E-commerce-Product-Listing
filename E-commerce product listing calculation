@@ -1,6 +1,6 @@
 #Input Section
 PCP= int(input("Enter the Product Cost Price Rs:"))    #Product CostPrice
-SMg=int(input("Enter the Seller Margin (%):"))         #Seller Margin(How much Seller wants to keep margin in Amount)
+SMg=int(input("Enter the Seller Margin (%):"))         #Seller Margin(How much Seller wants to keep margin)
 SM= (SMg/100)*PCP                                      #seller margin Calculation
 PC= int(input("Enter the Packing charge Rs:"))        #Packing Cost
 Print_C=3                                             #Fixed Printing Cost
