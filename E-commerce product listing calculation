@@ -1,0 +1,47 @@
+PCP= int(input("Enter the Product Cost Price Rs:"))         #Product CostPrice
+SMg=int(input("Enter the Seller Margin (%):"))         #Seller Margin(How much Seller wants to keep margin in Amount)
+SM= (SMg/100)
+PC= int(input("Enter the Packing charge Rs:"))        #Packing Cost
+Print_C=3                                             #Fixed Printing Cost
+Wt= int(input("Enter the product weight(gms):"))      #Product Weight
+Ship_C= 81  #Min shipping cost
+GST=0.18                                            #GST 18%
+Z=0
+X=0
+R=0
+
+#Final Seller cost
+Final_SC= PCP+PC+Print_C
+
+#Platform Commission Calculation
+if Final_SC <500:
+    Pf_Commission= 0.15 * Final_SC
+elif Final_SC >=500 and Final_SC<=1000:
+    Pf_Commission= 0.16 * Final_SC
+else:
+    Pf_Commission= 0.165* Final_SC
+
+
+#CLosing Fee calculation
+if Final_SC <=250:
+    CF= 4
+elif Final_SC >=251 and Final_SC<=500:
+    CF= 9
+elif Final_SC >=501 and Final_SC<=1000:
+    CF= 30
+else:
+    CF=61
+
+#Weight Calculation
+if Wt >500:
+    X=(Wt-500)
+    R= (X//500)
+    Z= R*25
+
+#Final Shipping Cost
+F_Shipping_c = Z+Ship_C
+
+#Display Price
+Listing_Price= (Final_SC+ Pf_Commission+ CF+ F_Shipping_c)*GST + (Final_SC+ Pf_Commission+ CF+ F_Shipping_c)
+Round= round(Listing_Price)
+print("The Listing Price is Rs",Round)
