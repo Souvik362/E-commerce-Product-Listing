@@ -1,17 +1,19 @@
-PCP= int(input("Enter the Product Cost Price Rs:"))         #Product CostPrice
+#Input Section
+PCP= int(input("Enter the Product Cost Price Rs:"))    #Product CostPrice
 SMg=int(input("Enter the Seller Margin (%):"))         #Seller Margin(How much Seller wants to keep margin in Amount)
-SM= (SMg/100)
+SM= (SMg/100)*PCP                                      #seller margin Calculation
 PC= int(input("Enter the Packing charge Rs:"))        #Packing Cost
 Print_C=3                                             #Fixed Printing Cost
 Wt= int(input("Enter the product weight(gms):"))      #Product Weight
-Ship_C= 81  #Min shipping cost
-GST=0.18                                            #GST 18%
+
+#Constants
+Ship_C= 81                                            #Min shipping cost for 500gms
+GST=0.18                                              #GST at 18%
 Z=0
-X=0
-R=0
 
 #Final Seller cost
-Final_SC= PCP+PC+Print_C
+Final_SC=(PCP+PC+Print_C+SM)
+print("Final_SC:",Final_SC)
 
 #Platform Commission Calculation
 if Final_SC <500:
@@ -20,6 +22,7 @@ elif Final_SC >=500 and Final_SC<=1000:
     Pf_Commission= 0.16 * Final_SC
 else:
     Pf_Commission= 0.165* Final_SC
+    print("Pf_Commission:",Pf_Commission)
 
 
 #CLosing Fee calculation
@@ -31,17 +34,24 @@ elif Final_SC >=501 and Final_SC<=1000:
     CF= 30
 else:
     CF=61
+    print("Closing Fee:",CF)
 
 #Weight Calculation
-if Wt >500:
-    X=(Wt-500)
-    R= (X//500)
-    Z= R*25
-
+if Wt > 500:
+    X = (Wt - 500)
+    R = (X // 500) + 1
+    Z = R * 25            #For every additional 500gms Rs 25 is charged.
+else:
+    Z=0
+print("Additional weight cost",Z)
 #Final Shipping Cost
 F_Shipping_c = Z+Ship_C
+print("Final Shipping Cost",F_Shipping_c)
 
-#Display Price
-Listing_Price= (Final_SC+ Pf_Commission+ CF+ F_Shipping_c)*GST + (Final_SC+ Pf_Commission+ CF+ F_Shipping_c)
-Round= round(Listing_Price)
-print("The Listing Price is Rs",Round)
+#Total Cost before GST
+Total_Cost= (Final_SC+ Pf_Commission+ CF+ F_Shipping_c)
+print("Total_Cost:",Total_Cost)
+
+# Listing Price Calculation inc. GST
+Listing_Price =round(Total_Cost * (1 + GST))
+print("The Listing Price is Rs",Listing_Price,"Inc. GST")
